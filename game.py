@@ -1,6 +1,9 @@
+from pole import Pole
+
 class Game(object):
 
     def __init__(self):
+        self.__word = ''
         self.__wrongGuesses = 0
         self.__rightGuesses = 0
         self.__characterNum = 0
@@ -46,9 +49,14 @@ class Game(object):
         :param prompt:
         :return: None
         """
+        print(Pole.__manPrint)
         with open(filename, 'r') as file:
             help = file.read()
         print(help, end='')
         if prompt:
             input('\n' + prompt)
         hi = input("\n\npress <return> to continue")
+
+if __name__ =='__main__':
+    simulation = Game()
+    simulation.main()
