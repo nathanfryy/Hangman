@@ -1,7 +1,8 @@
 from pole import Pole
 from player import Player
-from words import wordList
+from words import wordList1, wordList2, wordList3
 import random
+import toolbox
 
 class Game(object):
 
@@ -13,6 +14,7 @@ class Game(object):
         self.__rightGuesses = 0
         self.__characterNum = 0
         self.__lettersGuessed = []
+        self.__categoryChoice = 0
 
     def main(self):
         """
@@ -100,11 +102,23 @@ class Game(object):
         self.__rightGuesses = 0
         self.__characterNum = 0
         self.__lettersGuessed = []
-        self.__word = random.choice(wordList)
+        self.__word = random.choice(self.get_category())
         self.__characterNum = len(self.__word)
         print(self.__word)
         print(self.show_pole() + '\n' + self.show_word())
         print('Your word is chosen')
+
+    def get_category(self):
+        print("Here are your categories of words to choose from:")
+        print("1. Animals     2. Foods     3. Sports")
+        self.__categoryChoice = toolbox.get_integer_between(1, 3, 'Which category do you want to use? ')
+        if self.__categoryChoice == 1:
+            self.__categoryChoice = wordList1
+        elif self.__categoryChoice == 2:
+            self.__categoryChoice = wordList2
+        else:
+            self.__categoryChoice = wordList3
+        return self.__categoryChoice
 
     def take_guess(self):
         currentGuess = self.__player.guess()
