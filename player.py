@@ -7,7 +7,13 @@ class Player(object):
 
     def guess(self):
         letter = toolbox.get_string('What is your letter guess?')
-        if len(letter) > 1:
-            letter = toolbox.get_string('What is your letter guess? Has to be one character.')
-        if len(letter) < 1:
-            letter = toolbox.get_string('What is your letter guess? Has to be one character.')
+        while len(letter) != 1:
+            print('Your guess has to be one character.')
+            letter = toolbox.get_string('What is your letter guess?')
+            while letter in ['1','2','3','4','5','6','7','8','8','9','0']:
+                print('Your guess has to be a letter.')
+                letter = toolbox.get_string('What is your letter guess?')
+                while letter in game.get_lettersGuesses():
+                    print('You have already guessed that.')
+                    letter = toolbox.get_string('What is your letter guess?')
+        return letter
