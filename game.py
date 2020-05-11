@@ -15,6 +15,7 @@ class Game(object):
         self.__characterNum = 0
         self.__lettersGuessed = []
         self.__gameOver = False
+        self.__categoryChoice = 0
 
     def main(self):
         """
