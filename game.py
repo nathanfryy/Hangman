@@ -35,8 +35,8 @@ class Game(object):
                 again = toolbox.get_boolean('Would you like to play a new game?')
                 if again == True:
                     self.start_game()
-                else:
-                    command = 'quit'
+                
+                   
 
 
 
@@ -104,7 +104,6 @@ class Game(object):
             again = toolbox.get_boolean('Would you like to play a new game?')
             if again == True:
                 self.start_game()
-            self.quit()
         return string
 
     def show_word(self):
@@ -129,8 +128,6 @@ class Game(object):
             again = toolbox.get_boolean('Would you like to play a new game?')
             if again == True:
                 self.start_game()
-            else:
-                self.quit()
         return string
 
     def status(self):
