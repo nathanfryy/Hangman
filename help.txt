@@ -9,9 +9,9 @@ How you doin this is hangman
 | |          ||  `/,|
 | |          (\\`_.'
 | |         .-`--'.
-| |        /Y . . Y\
-| |       // |   | \\
-| |      //  | . |  \\
+| |        /Y . . Y\             [G]uess = Take a guess
+| |       // |   | \\            [?]elp = get more instructions
+| |      //  | . |  \\           [N]ew Game = start a new game
 | |     ')   |   |   (`
 | |          ||'||
 | |          || ||
@@ -23,3 +23,11 @@ How you doin this is hangman
 | |        \ \        | |
 : :         \ \       : :
 . .          `'       . .
+
+In this game you will decide whether or not to play 2 player. If
+you do decide to do 2 player, player 2 will create their own word.
+Other wise it will ask you to choose between three categories of
+words for it to randomly choose. Then you press 'g' and enter your
+one letter guess. Once the hangman reaches full body then the game
+will be over. If you guess the whole word then the game will also
+be over. You are not allowed to ever enter numbers.
