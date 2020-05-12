@@ -2,7 +2,9 @@ from pole import Pole
 from player import Player
 from words import wordList1, wordList2, wordList3
 import toolbox
+import toolbox
 import random
+import toolbox
 
 class Game(object):
 
@@ -16,7 +18,9 @@ class Game(object):
         self.__lettersGuessed = []
         self.__hanged = False
         self.__categoryChoice = 0
-
+        self.__hanged = False
+        self.__categoryChoice = 0
+        self.__categoryChoice = 0
 
     def main(self):
         """
@@ -144,11 +148,24 @@ class Game(object):
         else:
             self.__word = toolbox.get_string('\nPlayer 1 now enter the word you would like.')
             print('Player 2 will guess.')
+        self.__word = random.choice(self.get_category())
         self.__characterNum = len(self.__word)
         print(self.show_pole() + '\n' + self.show_word() + '\nYour word is chosen' + '\n' + self.status())
 
     def get_category(self):
         print("\nHere are your categories of words to choose from:")
+        print("1. Animals     2. Foods     3. Sports")
+        self.__categoryChoice = toolbox.get_integer_between(1, 3, 'Which category do you want to use? ')
+        if self.__categoryChoice == 1:
+            self.__categoryChoice = wordList1
+        elif self.__categoryChoice == 2:
+            self.__categoryChoice = wordList2
+        else:
+            self.__categoryChoice = wordList3
+        return self.__categoryChoice
+
+    def get_category(self):
+        print("Here are your categories of words to choose from:")
         print("1. Animals     2. Foods     3. Sports")
         self.__categoryChoice = toolbox.get_integer_between(1, 3, 'Which category do you want to use? ')
         if self.__categoryChoice == 1:
