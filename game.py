@@ -14,32 +14,28 @@ class Game(object):
         self.__rightGuesses = 0
         self.__characterNum = 0
         self.__lettersGuessed = []
-        self.__gameOver = False
+        self.__hanged = False
         self.__categoryChoice = 0
+
 
     def main(self):
         """
         Main event loop for store.
         :return: None
         """
-        command = 'help'
+        command = 'startHelp'
         parameter = None
         while command != 'quit':
-            if command == 'help':
+            if command == 'startHelp':
                 self.help('help.txt')
                 self.start_game()
+            elif command == 'help':
+                self.help('help.txt')
+                print(self.show_pole() + '\n' + self.show_word() + '\n' + self.status())
             elif command == 'newGame':
                 self.start_game()
             elif command == 'guess':
                 self.take_guess()
-            elif self.__gameOver == True:
-                again = toolbox.get_boolean('Would you like to play a new game?')
-                if again == True:
-                    self.start_game()
-                
-                   
-
-
 
             command, parameter = self.get_command()
         print('goodbye')
@@ -49,7 +45,7 @@ class Game(object):
         Get a valid command from the user.
         :return: command, parameter
         """
-        commands = {'h': 'help',
+        commands = {'h': 'startHelp',
                     '?': 'help',
                     'q': 'quit',
                     'n': 'newGame',
@@ -86,6 +82,7 @@ class Game(object):
         hi = input("\n\npress <return> to continue")
 
     def show_pole(self):
+        string = ''
         if self.__wrongGuesses == 0:
             string = self.__pole.get_manPrint()
         elif self.__wrongGuesses == 1:
@@ -100,11 +97,7 @@ class Game(object):
             string = self.__pole.rightLeg()
         else:
             string = self.__pole.fullBody()
-            string += '\n\n****** You got hanged!!! ******'
-            self.__gameOver = True
-            again = toolbox.get_boolean('Would you like to play a new game?')
-            if again == True:
-                self.start_game()
+            self.__hanged = True
         return string
 
     def show_word(self):
@@ -121,34 +114,38 @@ class Game(object):
         string += '\n'
         for character in self.__word:
             string += ' ___ '
+        if self.__hanged == True:
+            string += f'\n\n******* You got hanged!!! *******'
         if regString == self.__word:
             print(string)
             print()
             string += f'\n\n******* You Guesses It!!! *******'
-            self.__gameOver = True
-            again = toolbox.get_boolean('Would you like to play a new game?')
-            if again == True:
-                self.start_game()
         return string
 
     def status(self):
         string = f'\nguessed letters: {self.__lettersGuessed} \n'
-        string += f'word: {self.__word} \n'
         string += f'wrong guesses: {self.__wrongGuesses} \n'
         string += f'right guesses: {self.__rightGuesses} \n'
+        string += f'length of word: {self.__characterNum}\n\n'
+        string += 'press: [G]uess   [?]elp  [N]ew Game'
         return string
 
 
     def start_game(self):
+        self.__hanged = False
         self.__word = ''
         self.__wrongGuesses = 0
         self.__rightGuesses = 0
         self.__characterNum = 0
         self.__lettersGuessed = []
-        self.__word = random.choice(self.get_category())
+        multiplayer = toolbox.get_boolean('\nWould you like 2 players?')
+        if multiplayer == False:
+            self.__word = random.choice(self.get_category())
+        else:
+            self.__word = toolbox.get_string('\nPlayer 1 now enter the word you would like.')
+            print('Player 2 will guess.')
         self.__characterNum = len(self.__word)
-        print(self.show_pole() + '\n' + self.show_word())
-        print('Your word is chosen.')
+        print(self.show_pole() + '\n' + self.show_word() + '\nYour word is chosen' + '\n' + self.status())
 
     def get_category(self):
         print("\nHere are your categories of words to choose from:")
@@ -161,6 +158,7 @@ class Game(object):
         else:
             self.__categoryChoice = wordList3
         return self.__categoryChoice
+
 
     def take_guess(self):
         currentGuess = self.__player.guess()
@@ -180,6 +178,8 @@ class Game(object):
                 self.__wrongGuesses += 1
             readyForPrint = True
         print(self.show_pole() + '\n' + self.show_word() + '\n' + self.status())
+
+
 
     def get_lettersGuesses(self):
         return self.__lettersGuessed
