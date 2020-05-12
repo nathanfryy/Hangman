@@ -1,10 +1,8 @@
 from pole import Pole
 from player import Player
 from words import wordList1, wordList2, wordList3
-<<<<<<< development
 import toolbox
-=======
->>>>>>> development
+import toolbox
 import random
 import toolbox
 
@@ -18,13 +16,11 @@ class Game(object):
         self.__rightGuesses = 0
         self.__characterNum = 0
         self.__lettersGuessed = []
-<<<<<<< development
         self.__hanged = False
         self.__categoryChoice = 0
-
-=======
+        self.__hanged = False
         self.__categoryChoice = 0
->>>>>>> development
+        self.__categoryChoice = 0
 
     def main(self):
         """
@@ -146,16 +142,13 @@ class Game(object):
         self.__rightGuesses = 0
         self.__characterNum = 0
         self.__lettersGuessed = []
-<<<<<<< development
         multiplayer = toolbox.get_boolean('\nWould you like 2 players?')
         if multiplayer == False:
             self.__word = random.choice(self.get_category())
         else:
             self.__word = toolbox.get_string('\nPlayer 1 now enter the word you would like.')
             print('Player 2 will guess.')
-=======
         self.__word = random.choice(self.get_category())
->>>>>>> development
         self.__characterNum = len(self.__word)
         print(self.show_pole() + '\n' + self.show_word() + '\nYour word is chosen' + '\n' + self.status())
 
@@ -171,7 +164,6 @@ class Game(object):
             self.__categoryChoice = wordList3
         return self.__categoryChoice
 
-
     def get_category(self):
         print("Here are your categories of words to choose from:")
         print("1. Animals     2. Foods     3. Sports")
@@ -183,6 +175,7 @@ class Game(object):
         else:
             self.__categoryChoice = wordList3
         return self.__categoryChoice
+
 
     def take_guess(self):
         currentGuess = self.__player.guess()
